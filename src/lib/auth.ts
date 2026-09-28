@@ -9,7 +9,6 @@ import { RoleName } from "@prisma/client";
 import { NextAuthOptions, getServerSession } from "next-auth";
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(db) as never,
   session: { strategy: "jwt" },
   pages: {
     signIn: "/login",
