@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAC Gallery</title>
+    <link rel="icon" href="../../home/images/college-logo.png" type="image">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/caf34cee9a.js" crossorigin="anonymous"></script>
+    <style>
+         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #312e1e;
+            height: 100vh;
+            margin: 0;
+        }
+        .gallery-section {
+            background-color: #f4f4f4;
+        }
+        .navbar-cont {
+            background-color: #312e1ef5;
+            padding: 6px;
+        }
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .navbar-head {
+            font-family: 'Poppins', sans-serif;
+            color: rgba(255, 255, 255, 0.76);
+            font-weight: 700;
+            font-size: 24px;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 14px rgba(0, 0, 0, 0.6);
+            margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+        .nav-text {
+            font-family: 'Poppins';;
+            color: rgba(255, 251, 236, 0.9);
+            font-weight: 400;
+            font-size: 14px;
+            margin: 0 20px;
+            transition: 0.5s;
+        }
+        .nav-text:hover {
+            color: #8a8b6a;
+            transform: translateY(-3px);
+        }
+        .navs-cont {
+            justify-content: center;
+        }
+        .brown-btn {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #3f4027;
+            color: white;
+            font-weight: 600;
+            box-shadow: 2px 2px 14px rgba(0, 0, 0, 0.367);
+            padding: 9px 12px;
+            border: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .brown-btn:hover {
+            background-color: #5a5b3962;
+            box-shadow: 1px 1px 10px rgba(68, 63, 46, 0.471);
+            color: white;
+            transform: scale(0.98);
+        }
+        .faculty-login-btn {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #ffffff;
+            color: #3f4027;
+            font-weight: 600;
+            box-shadow: 2px 2px 14px rgba(0, 0, 0, 0.367);
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .faculty-login-btn:hover {
+            background-color: #b6b78716;
+            box-shadow: 1px 1px 10px rgba(68, 63, 46, 0.155);
+            color: #b3b4a1;
+            transform: scale(0.98);
+        }
+
+        /* Chatbot Icon */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .chatbot-icon {
+            width: 72px;
+            height: 72px;
+            cursor: pointer;
+            box-shadow: 2px 2px 14px rgba(0, 0, 0, 0.4);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            filter: brightness(0.9);
+        }
+        .chatbot-icon:hover {
+            transform: scale(1.1);
+        }
+
+        /* Top Section */
+        .top-section {
+            text-align: center;
+            padding: 140px 20px 20px;
+        }
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .section-subtitle {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        /* Gallery Main Container */
+        .gallery-main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px 40px 15px;
+        }
+        .sub-section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 28px;
+            color: #444;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #b5b5b5;
+            padding-bottom: 10px;
+        }
+        .row {
+            margin-bottom: 80px;
+        }
+        .gallery-img {
+            height: 300px;
+
+        }
+        .gallery-video {
+            border-radius: 8px;
+        }
+
+        /* Contact section */
+        .contact-section {
+            background: #534d37ec;
+            padding: 80px 20px 1px;
+            font-family: "DM Sans";
+        }
+        .contact-section-logo {
+            width: 150px;
+        }
+        .contact-section-heading {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #fffef6;
+            font-weight: bold;
+        }
+        .contact-section-subtitle {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            color: #efefef;
+        }
+        .fact-para {
+            font-size: 1.3rem;
+            color: #48432f;
+            font-weight: 600;
+        }
+        .list-unstyled li {
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            color: #555;
+        }
+        .list-unstyled li:hover {
+            color: #3f4027;
+        }
+        .social-icons {
+            margin-top: 20px;
+        }
+        .social-icon {
+            font-size: 1.5rem;
+            color: #534d37ec;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        /* Footer Section */
+        .footer-section {
+            background: #312e1ed6;
+            padding: 10px 0;
+            text-align: center;
+            font-family: "DM Sans";
+        }
+        .footer-text {
+            color: rgba(255, 255, 255, 0.76);
+            font-size: 0.7rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery-section">
+        <!-- Navbar -->
+        <header class="navbar navbar-expand-lg navbar-dark navbar-cont fixed-top">
+            <div class="container-fluid">
+                <a class="navbar-brand navbar-head" href="#home">SSPC</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse navs-cont" id="navbarNavAltMarkup">
+                    <nav class="navbar-nav">
+                        <a class = "nav-link nav-text" href="../../index.html#about">About</a>
+                        <a class = "nav-link nav-text" href="../../index.html#courses">Courses</a>
+                        <a class = "nav-link nav-text" href="../../index.html#admissions">Admissions</a>
+                        <a class = "nav-link nav-text" href="../../index.html#news&events">Updates</a>
+                        <a class = "nav-link nav-text" href="../../index.html#management">Management</a>
+                        <a class = "nav-link nav-text" href="../../index.html#gallery">Gallery</a>
+                        <a class = "nav-link nav-text" href="../../index.html#placements">Placements</a>
+                        <a class = "nav-link nav-text" href="../../index.html#contact">Contact</a>
+                        <a href="../../faculty/login.html"><button class="faculty-login-btn">Faculty Login</button></a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <section>
+            <!-- Chatbot integration can be added here -->
+            <div class="chatbot-container">
+                <img class="chatbot-icon" src="../../chatbot/images/chatbot.png" />
+            </div>
+        </section>
+
+        <!-- Top Section -->
+        <section class="top-section">
+            <h1 class="section-title">Refrigiration and Air Conditioning</h1>
+            <p class="section-subtitle">Photos & videos taken from RAC environment</p>
+        </section>
+
+        <!-- Gallery Main Container -->
+        <section class="container gallery-main-container">
+            <div class="row g-4">
+                <h2 class="sub-section-title">Refrigiration and Air Conditioning Lab</h2>
+                <img class="gallery-img col-md-6 col-lg-4" src="r&ac1.JPG" alt="Refrigiration and Air Conditioning Lab Image 1">
+                <img class="gallery-img col-md-6 col-lg-4" src="r&ac2.JPG" alt="Refrigiration and Air Conditioning Lab Image 2">
+                <img class="gallery-img col-md-6 col-lg-4" src="r&ac3.JPG" alt="Refrigiration and Air Conditioning Lab Image 3">
+                <img class="gallery-img col-md-6 col-lg-4" src="r&ac4.JPG" alt="Refrigiration and Air Conditioning Lab Image 4">
+            </div>
+            <div class="row g-4 mt-4">
+                <h2 class="sub-section-title">Videos</h2>
+                <div>
+                    <video class="gallery-video col-12 col-md-6 col-lg-4" controls muted>
+                        <source src="r&ac_lab.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="row">
+                <article class="col-md-4 col-lg-6 mb-4">
+                    <img src="../../home/images/college-logo.png" alt="logo" title="sspc-logo" class="contact-section-logo mb-4">
+                    <h2 class="contact-section-heading">Sri Sowdambika Polytechnic</h2>
+                    <p class="contact-section-subtitle">Have questions or need more information? We're here to help!</p>
+                    <button class="brown-btn">Contact Us</button>
+                </article>
+                
+                <!-- Large Screen -->
+                <article class="d-none d-lg-block col-lg-3">
+                    <!-- Quick links -->
+                    <h2 class="fact-para text-white mb-3">Quick Links</h2>
+                    <ul class="list-unstyled mb-4">
+                        <li><a href="#about" class="text-white text-decoration-none">About Us</a></li>
+                        <li><a href="#courses" class="text-white text-decoration-none">Courses</a></li>
+                        <li><a href="#admissions" class="text-white text-decoration-none">Admissions</a></li>
+                        <li><a href="#news&events" class="text-white text-decoration-none">News & Events</a></li>
+                        <li><a href="#management" class="text-white text-decoration-none">Management</a></li>
+                        <li><a href="#placements" class="text-white text-decoration-none">Placements</a></li>
+                    </ul>
+                
+                <!-- Resources -->
+                    <h2 class="fact-para text-white mb-3">Resources</h2>
+                    <ul class="list-unstyled mb-4">
+                        <li><a href="#" class="text-white text-decoration-none">NCC</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">NSS</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">RRC</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">CIICP</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Faculty Portal</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Transportation</a></li>
+                    </ul>
+                </article>
+
+                <!-- Medium Screen -->
+                <article style="padding-left: 35px;"  class="col-md-4 d-none d-md-block d-lg-none">
+                    <!-- Quick links -->
+                    <h2 class="fact-para text-white mb-3">Quick Links</h2>
+                    <ul class="list-unstyled mb-4">
+                        <li><a href="#about" class="text-white text-decoration-none">About Us</a></li>
+                        <li><a href="#courses" class="text-white text-decoration-none">Courses</a></li>
+                        <li><a href="#admissions" class="text-white text-decoration-none">Admissions</a></li>
+                        <li><a href="#news&events" class="text-white text-decoration-none">News & Events</a></li>
+                        <li><a href="#management" class="text-white text-decoration-none">Management</a></li>
+                        <li><a href="#placements" class="text-white text-decoration-none">Placements</a></li>
+                    </ul>
+                
+                <!-- Resources -->
+                    <h2 class="fact-para text-white mb-3">Resources</h2>
+                    <ul class="list-unstyled mb-4">
+                        <li><a href="#" class="text-white text-decoration-none">NCC</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">NSS</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">RRC</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">CIICP</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Faculty Portal</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Transportation</a></li>
+                    </ul>
+                </article>
+
+                <!-- Small Screen -->
+                <article class="d-flex flex-row justify-content-between d-md-none mb-4">
+                    <!-- Quick links -->
+                    <div>
+                        <h2 class="fact-para text-white mb-3">Quick Links</h2>
+                        <ul class="list-unstyled mb-4">
+                            <li><a href="#about" class="text-white text-decoration-none">About Us</a></li>
+                            <li><a href="#courses" class="text-white text-decoration-none">Courses</a></li>
+                            <li><a href="#admissions" class="text-white text-decoration-none">Admissions</a></li>
+                            <li><a href="#news&events" class="text-white text-decoration-none">News & Events</a></li>
+                            <li><a href="#management" class="text-white text-decoration-none">Management</a></li>
+                            <li><a href="#placements" class="text-white text-decoration-none">Placements</a></li>
+                        </ul>
+                    </div>
+                
+                <!-- Resources -->
+                    <div>
+                        <h2 class="fact-para text-white mb-3">Resources</h2>
+                        <ul class="list-unstyled mb-4">
+                            <li><a href="#" class="text-white text-decoration-none">NCC</a></li>
+                            <li><a href="#" class="text-white text-decoration-none">NSS</a></li>
+                            <li><a href="#" class="text-white text-decoration-none">RRC</a></li>
+                            <li><a href="#" class="text-white text-decoration-none">CIICP</a></li>
+                            <li><a href="#" class="text-white text-decoration-none">Faculty Portal</a></li>
+                            <li><a href="#" class="text-white text-decoration-none">Transportation</a></li>
+                        </ul>
+                    </div>
+                </article>
+                    
+                <!-- Contact info -->
+                <div class="col-md-4 col-lg-3">
+                    <h2 class="fact-para text-white mb-3">Contact Info</h2>
+                    <p class="text-white mb-3">Thiruchuli Road, Aruppukottai, Tamil Nadu, 626101</p>
+                    <p class="text-white mb-3"><strong>Office:</strong> 04566 220478</p>
+                    <p class="text-white mb-32"><strong>Principal:</strong> 04566 221627</p>
+                    <p class="text-white mb-3"><strong>Hostel:</strong> 04566 221129</p>
+                    <p class="text-white mb-3"><strong>Fax: </strong> 04566 220478</p>
+                    <p class="text-white mb-3"><strong>Email:</strong> sspedu84@gmail.com </p>
+
+                    <div class="social-icons mt-5">
+                        <a href="#" class="text-white social-icon me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white social-icon me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white social-icon me-3"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-white social-icon"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer section -->
+    <section class="footer-section">
+        <div class="container text-center p-0">
+            <p class="footer-text mb-0">&copy; 2026 Sri Sowdambika Polytechnic College.</p>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>

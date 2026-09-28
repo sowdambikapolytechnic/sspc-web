@@ -1,0 +1,462 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ─── RBAC ─────────────────────────────────────────────────────────────────────
+
+enum RoleName {
+  SUPER_ADMIN
+  ADMIN
+  FACULTY
+}
+
+model Role {
+  id          String       @id @default(uuid())
+  name        RoleName     @unique
+  users       User[]
+  permissions RolePermission[]
+
+  @@map("roles")
+}
+
+model Permission {
+  id    String           @id @default(uuid())
+  name  String           @unique
+  roles RolePermission[]
+
+  @@map("permissions")
+}
+
+model RolePermission {
+  roleId       String
+  permissionId String
+  role         Role       @relation(fields: [roleId], references: [id])
+  permission   Permission @relation(fields: [permissionId], references: [id])
+
+  @@id([roleId, permissionId])
+  @@map("role_permissions")
+}
+
+// ─── USERS ────────────────────────────────────────────────────────────────────
+
+model User {
+  id           String     @id @default(uuid())
+  email        String     @unique
+  passwordHash String     @map("password_hash")
+  name         String
+  roleId       String     @map("role_id")
+  departmentId String?    @map("department_id")
+  active       Boolean    @default(true)
+  legacyId     String?    @map("legacy_id") // e.g. "PLO-3501" for traceability
+  createdAt    DateTime   @default(now()) @map("created_at")
+  updatedAt    DateTime   @updatedAt @map("updated_at")
+  deletedAt    DateTime?  @map("deleted_at")
+
+  role         Role       @relation(fields: [roleId], references: [id])
+  department   Department? @relation(fields: [departmentId], references: [id])
+  auditLogs    AuditLog[]
+  media        Media[]
+
+  @@map("users")
+}
+
+// ─── DEPARTMENTS ──────────────────────────────────────────────────────────────
+
+model Department {
+  id          String   @id @default(uuid())
+  name        String
+  slug        String   @unique
+  description String?
+  hodName     String?  @map("hod_name")
+  contactInfo String?  @map("contact_info")
+  seoTitle    String?  @map("seo_title")
+  seoDesc     String?  @map("seo_desc")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  users             User[]
+  faculty           DepartmentFaculty[]
+  courses           DepartmentCourse[]
+  news              News[]
+  events            Event[]
+  galleryAlbums     GalleryAlbum[]
+
+  @@map("departments")
+}
+
+model DepartmentFaculty {
+  id           String     @id @default(uuid())
+  departmentId String     @map("department_id")
+  name         String
+  designation  String
+  qualification String?
+  photoMediaId String?    @map("photo_media_id")
+  sortOrder    Int        @default(0) @map("sort_order")
+  createdAt    DateTime   @default(now()) @map("created_at")
+
+  department   Department @relation(fields: [departmentId], references: [id])
+  photo        Media?     @relation(fields: [photoMediaId], references: [id])
+
+  @@map("department_faculty")
+}
+
+model DepartmentCourse {
+  id           String     @id @default(uuid())
+  departmentId String     @map("department_id")
+  name         String
+  duration     String?
+  intake       Int?
+  description  String?
+  sortOrder    Int        @default(0) @map("sort_order")
+
+  department   Department @relation(fields: [departmentId], references: [id])
+
+  @@map("department_courses")
+}
+
+// ─── NEWS ─────────────────────────────────────────────────────────────────────
+
+enum ContentStatus {
+  draft
+  published
+}
+
+model News {
+  id           String        @id @default(uuid())
+  title        String
+  bodyHtml     String?       @map("body_html")
+  category     String        @default("Academics")
+  status       ContentStatus @default(draft)
+  publishDate  DateTime?     @map("publish_date")
+  coverMediaId String?       @map("cover_media_id")
+  departmentId String?       @map("department_id")
+  seoTitle     String?       @map("seo_title")
+  seoDesc      String?       @map("seo_desc")
+  deleted      Boolean       @default(false)
+  legacyId     String?       @map("legacy_id")
+  createdAt    DateTime      @default(now()) @map("created_at")
+  updatedAt    DateTime      @updatedAt @map("updated_at")
+
+  coverMedia   Media?        @relation(fields: [coverMediaId], references: [id])
+  department   Department?   @relation(fields: [departmentId], references: [id])
+
+  @@map("news")
+}
+
+// ─── EVENTS ───────────────────────────────────────────────────────────────────
+
+model Event {
+  id           String        @id @default(uuid())
+  title        String
+  description  String?
+  eventDate    DateTime?     @map("event_date")
+  location     String?
+  category     String        @default("Academics")
+  status       ContentStatus @default(draft)
+  coverMediaId String?       @map("cover_media_id")
+  departmentId String?       @map("department_id")
+  seoTitle     String?       @map("seo_title")
+  seoDesc      String?       @map("seo_desc")
+  deleted      Boolean       @default(false)
+  legacyId     String?       @map("legacy_id")
+  createdAt    DateTime      @default(now()) @map("created_at")
+  updatedAt    DateTime      @updatedAt @map("updated_at")
+
+  coverMedia   Media?        @relation(fields: [coverMediaId], references: [id])
+  department   Department?   @relation(fields: [departmentId], references: [id])
+
+  @@map("events")
+}
+
+// ─── GALLERY ──────────────────────────────────────────────────────────────────
+
+model GalleryAlbum {
+  id           String         @id @default(uuid())
+  title        String
+  category     String?
+  departmentId String?        @map("department_id")
+  sortOrder    Int            @default(0) @map("sort_order")
+  createdAt    DateTime       @default(now()) @map("created_at")
+  updatedAt    DateTime       @updatedAt @map("updated_at")
+
+  department   Department?    @relation(fields: [departmentId], references: [id])
+  items        GalleryItem[]
+
+  @@map("gallery_albums")
+}
+
+model GalleryItem {
+  id        String       @id @default(uuid())
+  albumId   String       @map("album_id")
+  mediaId   String       @map("media_id")
+  caption   String?
+  sortOrder Int          @default(0) @map("sort_order")
+
+  album     GalleryAlbum @relation(fields: [albumId], references: [id], onDelete: Cascade)
+  media     Media        @relation(fields: [mediaId], references: [id])
+
+  @@map("gallery_items")
+}
+
+// ─── MEDIA ────────────────────────────────────────────────────────────────────
+
+enum MediaType {
+  image
+  video
+  document
+}
+
+model Media {
+  id           String     @id @default(uuid())
+  type         MediaType
+  storagePath  String     @map("storage_path")
+  url          String
+  filename     String
+  altText      String?    @map("alt_text")
+  sizeBytes    Int?       @map("size_bytes")
+  mimeType     String?    @map("mime_type")
+  tags         String[]   @default([])
+  uploadedById String?    @map("uploaded_by")
+  createdAt    DateTime   @default(now()) @map("created_at")
+
+  uploadedBy         User?              @relation(fields: [uploadedById], references: [id])
+  newsCover          News[]
+  eventCover         Event[]
+  galleryItems       GalleryItem[]
+  pageSections       PageSection[]
+  placementCompanies PlacementCompany[]
+  managementMembers  ManagementMember[]
+  departmentFaculty  DepartmentFaculty[]
+  alumni             Alumni[]
+  documents          Document[]
+
+  @@map("media")
+}
+
+// ─── PLACEMENTS ───────────────────────────────────────────────────────────────
+
+model Placement {
+  id             String             @id @default(uuid())
+  year           Int
+  statisticsJson Json?              @map("statistics_json")
+  createdAt      DateTime           @default(now()) @map("created_at")
+  updatedAt      DateTime           @updatedAt @map("updated_at")
+
+  companies      PlacementCompany[]
+
+  @@map("placements")
+}
+
+model PlacementCompany {
+  id          String     @id @default(uuid())
+  placementId String     @map("placement_id")
+  name        String
+  logoMediaId String?    @map("logo_media_id")
+  sortOrder   Int        @default(0) @map("sort_order")
+
+  placement   Placement  @relation(fields: [placementId], references: [id], onDelete: Cascade)
+  logo        Media?     @relation(fields: [logoMediaId], references: [id])
+
+  @@map("placement_companies")
+}
+
+// ─── MANAGEMENT ───────────────────────────────────────────────────────────────
+
+model ManagementMember {
+  id           String   @id @default(uuid())
+  name         String
+  designation  String
+  description  String?
+  photoMediaId String?  @map("photo_media_id")
+  sortOrder    Int      @default(0) @map("sort_order")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  photo        Media?   @relation(fields: [photoMediaId], references: [id])
+
+  @@map("management_members")
+}
+
+// ─── ADMISSIONS ───────────────────────────────────────────────────────────────
+
+model AdmissionsInfo {
+  id             String   @id @default(uuid())
+  contentJson    Json?    @map("content_json")  // flexible structured fields
+  importantDates Json?    @map("important_dates")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  @@map("admissions_info")
+}
+
+// ─── ALUMNI ───────────────────────────────────────────────────────────────────
+
+model Alumni {
+  id               String   @id @default(uuid())
+  firstName        String   @map("first_name")
+  lastName         String?  @map("last_name")
+  email            String?
+  phone            String?
+  yearOfAdmission  Int?     @map("year_of_admission")
+  yearOfPassing    Int?     @map("year_of_passing")
+  birthDate        DateTime? @map("birth_date")
+  course           String?
+  currentStatus    String?  @map("current_status")
+  companyName      String?  @map("company_name")
+  address          String?
+  city             String?
+  state            String?
+  journey          String?
+  fondestMemories  String?  @map("fondest_memories")
+  photoMediaId     String?  @map("photo_media_id")
+  deleted          Boolean  @default(false)
+  legacyId         String?  @map("legacy_id")
+  createdAt        DateTime @default(now()) @map("created_at")
+
+  photo            Media?   @relation(fields: [photoMediaId], references: [id])
+
+  @@map("alumni")
+}
+
+// ─── ENQUIRIES ────────────────────────────────────────────────────────────────
+
+enum EnquiryStatus {
+  new
+  contacted
+  closed
+}
+
+model Enquiry {
+  id                String        @id @default(uuid())
+  name              String
+  email             String
+  phone             String?
+  course            String?
+  relatedDepartment String?       @map("related_department")
+  message           String?
+  status            EnquiryStatus @default(new)
+  actionOn          DateTime?     @map("action_on")
+  actionBy          String?       @map("action_by")
+  legacyId          String?       @map("legacy_id")
+  createdAt         DateTime      @default(now()) @map("created_at")
+
+  @@map("enquiries")
+}
+
+// ─── GRIEVANCES ───────────────────────────────────────────────────────────────
+
+enum GrievanceStatus {
+  open
+  reviewed
+  resolved
+}
+
+model Grievance {
+  id              String          @id @default(uuid())
+  name            String
+  email           String?
+  phone           String?
+  grievanceType   String?         @map("grievance_type")
+  message         String?
+  status          GrievanceStatus @default(open)
+  readBy          String?         @map("read_by")
+  readAt          DateTime?       @map("read_at")
+  legacyId        String?         @map("legacy_id")
+  createdAt       DateTime        @default(now()) @map("created_at")
+
+  @@map("grievances")
+}
+
+// ─── FEEDBACK ─────────────────────────────────────────────────────────────────
+
+model Feedback {
+  id           String   @id @default(uuid())
+  name         String
+  email        String?
+  phone        String?
+  feedbackType String?  @map("feedback_type")
+  message      String?
+  reviewed     Boolean  @default(false)
+  legacyId     String?  @map("legacy_id")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  @@map("feedback")
+}
+
+// ─── DOCUMENTS ────────────────────────────────────────────────────────────────
+
+model Document {
+  id       String  @id @default(uuid())
+  title    String
+  category String  // "AICTE" | "mandatory_disclosure" | "placement" | "other"
+  year     Int?
+  mediaId  String  @map("media_id")
+
+  media    Media   @relation(fields: [mediaId], references: [id])
+
+  @@map("documents")
+}
+
+// ─── INSTITUTIONAL SECTIONS ───────────────────────────────────────────────────
+// NCC / NSS / RRC / CIICP / Transportation — shared shape, differentiated by type
+
+model InstitutionalSection {
+  id          String   @id @default(uuid())
+  type        String   // "NCC" | "NSS" | "RRC" | "CIICP" | "Transportation"
+  title       String?
+  description String?
+  contactInfo String?  @map("contact_info")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@unique([type])
+  @@map("institutional_sections")
+}
+
+// ─── PAGES & FLEXIBLE ZONES ───────────────────────────────────────────────────
+
+model Page {
+  id       String        @id @default(uuid())
+  slug     String        @unique
+  title    String
+  sections PageSection[]
+
+  @@map("pages")
+}
+
+model PageSection {
+  id        String  @id @default(uuid())
+  pageId    String  @map("page_id")
+  type      String  // "text" | "image" | "card" | "link" | "document"
+  data      Json
+  sortOrder Int     @default(0) @map("sort_order")
+  mediaId   String? @map("media_id")
+
+  page      Page    @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  media     Media?  @relation(fields: [mediaId], references: [id])
+
+  @@map("page_sections")
+}
+
+// ─── AUDIT LOGS ───────────────────────────────────────────────────────────────
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String?  @map("user_id")
+  action    String   // "CREATE" | "UPDATE" | "DELETE" | "RESTORE" | "LOGIN" | ...
+  entity    String   // table name e.g. "news"
+  entityId  String?  @map("entity_id")
+  changes   Json?    // { before: {...}, after: {...} }
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user      User?    @relation(fields: [userId], references: [id])
+
+  @@map("audit_logs")
+}
