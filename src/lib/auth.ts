@@ -10,7 +10,6 @@ import { NextAuthOptions, getServerSession } from "next-auth";
 
 export const authOptions: NextAuthOptions = {
   session: { strategy: "jwt" },
-  trustHost: true,
   pages: {
     signIn: "/login",
     error: "/login",
