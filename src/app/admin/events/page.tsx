@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { DeleteEventButton } from "./DeleteEventButton";
 
 export const metadata: Metadata = { title: "Events | SSPC Admin" };
 
@@ -54,9 +55,12 @@ export default async function AdminEventsPage() {
                   </span>
                 </td>
                 <td style={{ padding: "16px 20px" }}>
-                  <Link href={`/admin/events/${item.id}/edit`} style={{ color: "var(--brand-secondary)", fontSize: "0.85rem", fontWeight: 600 }}>
-                    Edit
-                  </Link>
+                  <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+                    <Link href={`/admin/events/${item.id}/edit`} style={{ color: "var(--brand-secondary)", fontSize: "0.85rem", fontWeight: 600 }}>
+                      Edit
+                    </Link>
+                    <DeleteEventButton id={item.id} />
+                  </div>
                 </td>
               </tr>
             ))}

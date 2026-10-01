@@ -85,3 +85,14 @@ export async function deleteEvent(id: string) {
   revalidatePath("/admin/events");
   revalidatePath("/events");
 }
+
+export async function deleteGalleryItem(id: string) {
+  const session = await auth();
+  if (!session || session.user.role !== "SUPER_ADMIN" && session.user.role !== "ADMIN") {
+    throw new Error("Unauthorized");
+  }
+
+  await db.galleryItem.delete({ where: { id } });
+  revalidatePath("/admin/gallery");
+  revalidatePath("/gallery");
+}

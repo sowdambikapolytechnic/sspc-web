@@ -43,7 +43,7 @@ const ALL_IMAGES = [
   { src: "/gallery/ece/ECE_3.JPG",      alt: "ECE Practical Session",        cat: "ece",     dept: "Electronics & Comm.",     span: 1 },
   { src: "/gallery/ece/ECE_4.JPG",      alt: "ECE Students",                 cat: "ece",     dept: "Electronics & Comm.",     span: 1 },
   // IT
-  { src: "/gallery/information-technology/wallpaper.jpg", alt: "IT Dept. Overview", cat: "it", dept: "Information Technology", span: 2 },
+  { src: "/gallery/information-technology/wallpaper.jpg", alt: "Information Technology Dept. Overview", cat: "it", dept: "Information Technology", span: 2 },
   { src: "/gallery/information-technology/IT_1.JPG",      alt: "IT Lab 1",          cat: "it", dept: "Information Technology", span: 1 },
   { src: "/gallery/information-technology/IT_2.JPG",      alt: "IT Students",       cat: "it", dept: "Information Technology", span: 1 },
   { src: "/gallery/information-technology/IT_3.JPG",      alt: "IT Lab 2",          cat: "it", dept: "Information Technology", span: 1 },

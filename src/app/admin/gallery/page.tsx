@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import type { Metadata } from "next";
 import Image from "next/image";
+import { DeleteGalleryItemButton } from "./DeleteGalleryItemButton";
 
 export const metadata: Metadata = { title: "Gallery | SSPC Admin" };
 
@@ -71,6 +72,7 @@ export default async function AdminGalleryPage() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: 12 }}>
             {items.map((item) => (
               <div key={item.id} style={{ position: "relative", borderRadius: "var(--radius-md)", overflow: "hidden", aspectRatio: "1", background: "var(--bg-offset)", border: "1px solid var(--border-subtle)" }}>
+                <DeleteGalleryItemButton id={item.id} />
                 {item.media?.url ? (
                   <Image src={item.media.url} alt={item.media.altText || "Gallery image"} fill style={{ objectFit: "cover" }} />
                 ) : (

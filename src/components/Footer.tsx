@@ -83,7 +83,7 @@ export default function Footer() {
           © {new Date().getFullYear()} Sri Sowdambika Polytechnic College. All rights reserved.
         </div>
         <div className="footer-copy">
-          Built by IT Dept · 2026 Batch
+          Built by Information Technology Dept · 2026 Batch
         </div>
       </div>
     </footer>

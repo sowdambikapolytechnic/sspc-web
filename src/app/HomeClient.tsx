@@ -33,7 +33,7 @@ const NEWS_ITEMS = [
   { id: 3, title: "Amazing Placements — New Companies for IT Department", category: "Placements",      dept: "Information Technology", date: "Mar 31, 2026", img: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=800&auto=format&fit=crop" },
   { id: 4, title: "Runner Up at International Kabaddi Competition",        category: "Achievements",    dept: "EEE",                    date: "Mar 20, 2026", img: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=800&auto=format&fit=crop" },
   { id: 5, title: "Semester Exams Starting March 23 Onwards",            category: "Announcements",   dept: "Management",             date: "Mar 23, 2026", img: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800&auto=format&fit=crop" },
-  { id: 6, title: "New Linux Laboratory Under Construction for IT Dept",  category: "Infrastructure",  dept: "Information Technology", date: "Jun 6, 2026",  img: "https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=800&auto=format&fit=crop" },
+  { id: 6, title: "New Linux Laboratory Under Construction for Information Technology Dept",  category: "Infrastructure",  dept: "Information Technology", date: "Jun 6, 2026",  img: "https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=800&auto=format&fit=crop" },
 ];
 
 const EVENTS_ITEMS = [
