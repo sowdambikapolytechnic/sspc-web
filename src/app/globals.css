@@ -311,6 +311,19 @@ button { cursor: pointer; font-family: inherit; }
 /* ── Page offset (so content doesn't hide behind fixed nav) ──── */
 main { padding-top: 112px; }
 
+/* ── Mobile Menu Links ───────────────────────────────────────────────────────── */
+.nav-mobile-link { 
+  display: block; 
+  padding: 12px 0; 
+  color: var(--text-primary); 
+  font-weight: 600; 
+  font-size: 1.05rem; 
+  text-decoration: none; 
+  border-bottom: 1px solid var(--border-subtle); 
+  transition: var(--transition); 
+}
+.nav-mobile-link:hover { color: var(--brand-secondary); padding-left: 4px; }
+
 /* ── Hero ────────────────────────────────────────────────────────────────────── */
 .hero {
   position: relative;

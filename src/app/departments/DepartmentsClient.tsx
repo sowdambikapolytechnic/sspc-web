@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { Building2, Zap, Radio, Laptop, Settings, Scissors } from "lucide-react";
+import { Building2, Zap, Radio, Laptop, Settings, Scissors, Wind } from "lucide-react";
 
 const DEPARTMENTS = [
   { name: "Civil Engineering",         slug: "civil-engineering",         icon: <Building2 size={24} />, code: "CE",   desc: "Build the future with core civil engineering principles, structural design, and construction management.", img: "/gallery/civil/civil_1.JPG" },
@@ -10,6 +10,7 @@ const DEPARTMENTS = [
   { name: "Information Technology",    slug: "information-technology",    icon: <Laptop size={24} />, code: "IT",   desc: "Become a software expert with our comprehensive curriculum in programming, networking, and web development.", img: "/gallery/information-technology/IT_1.JPG" },
   { name: "Mechanical Engineering",    slug: "mechanical-engineering",    icon: <Settings size={24} />, code: "MECH", desc: "Design, analyze, and manufacture mechanical systems for diverse industrial applications.", img: "/gallery/mech/mech_1.JPG" },
   { name: "Textile Technology",        slug: "textile-technology",        icon: <Scissors size={24} />, code: "TEXT", desc: "Learn the science and engineering behind modern textile manufacturing and processing.", img: "/gallery/textile/textile_1.JPG" },
+  { name: "Refrigeration & AC",        slug: "refrigeration-air-conditioning", icon: <Wind size={24} />, code: "R&AC", desc: "Master the principles of heating, ventilation, air conditioning, and refrigeration systems.", img: "/gallery/mech/mech1.JPG" },
 ];
 
 export default function DepartmentsClient() {

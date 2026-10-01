@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Building2, Zap, Radio, Laptop, Settings, Scissors, Microscope, User } from "lucide-react";
+import { Building2, Zap, Radio, Laptop, Settings, Scissors, Microscope, User, Wind } from "lucide-react";
 
 // Mock content based on legacy structure. In a full DB implementation, this could be fetched.
 const DEPT_DATA: Record<string, any> = {
@@ -102,6 +102,22 @@ const DEPT_DATA: Record<string, any> = {
     ],
     labs: [
       "Spinning Lab", "Weaving Lab", "Textile Testing Lab", "Garment Construction Lab"
+    ]
+  },
+  "refrigeration-air-conditioning": {
+    name: "Refrigeration & Air Conditioning",
+    code: "R&AC",
+    icon: <Wind size={48} />,
+    hod: "Mr. S. Ramesh", // Usually falls under mechanical in some colleges, using Mechanical HOD
+    img: "/gallery/mech/mech1.JPG", // Using mechanical as fallback
+    desc: "The Refrigeration and Air Conditioning department focuses on the principles of heating, ventilation, air conditioning, and refrigeration systems (HVAC&R).",
+    vision: "To develop skilled professionals capable of designing, installing, and maintaining modern HVAC&R systems.",
+    mission: [
+      "To provide practical training on the latest refrigeration technologies.",
+      "To collaborate with HVAC companies for placements and workshops.",
+    ],
+    labs: [
+      "Refrigeration and Air Conditioning Lab", "Thermodynamics Lab", "Fluid Mechanics Lab"
     ]
   }
 };

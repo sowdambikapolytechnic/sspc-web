@@ -15,6 +15,7 @@ const NAV_ITEMS = [
       { label: "Information Technology",     href: "/departments/information-technology" },
       { label: "Mechanical Engineering",     href: "/departments/mechanical-engineering" },
       { label: "Textile Technology",         href: "/departments/textile-technology" },
+      { label: "Refrigeration & AC",         href: "/departments/refrigeration-air-conditioning" },
     ],
   },
   { label: "Admissions", href: "/admissions" },

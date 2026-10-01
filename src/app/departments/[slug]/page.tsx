@@ -11,6 +11,7 @@ const DEPARTMENTS = [
   "information-technology",
   "mechanical-engineering",
   "textile-technology",
+  "refrigeration-air-conditioning",
 ];
 
 type Props = {
