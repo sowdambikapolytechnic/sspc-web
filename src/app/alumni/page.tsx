@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { GraduationCap, Mail } from "lucide-react";
+import AlumniForm from "./AlumniForm";
 
 export const metadata: Metadata = {
   title: "Alumni | SSPC",
@@ -31,9 +32,7 @@ export default function AlumniPage() {
             <p style={{ color: "var(--text-secondary)", fontSize: "1.05rem", lineHeight: 1.7, marginBottom: 32 }}>
               Are you an alumnus of Sri Sowdambika Polytechnic College? We would love to hear from you! Join our growing alumni network to connect with old friends, mentor current students, and stay updated on campus news.
             </p>
-            <button className="btn-primary" style={{ fontSize: "1rem", padding: "12px 28px" }}>
-              Join the Alumni Directory
-            </button>
+            <AlumniForm />
           </div>
 
           <h2 className="section-title" style={{ fontSize: "1.8rem", marginBottom: 24, textAlign: "center" }}>Alumni Association</h2>

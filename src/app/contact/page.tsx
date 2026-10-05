@@ -42,8 +42,8 @@ export default function ContactPage() {
                   <div className="contact-info-label">Address</div>
                   <div className="contact-info-value">
                     Sri Sowdambika Polytechnic College<br />
-                    Aruppukottai Road, Chokkanathanputhur,<br />
-                    Virudhunagar District, Tamil Nadu 626121
+                    Thiruchuli Road, Aruppukottai,<br />
+                    Tamil Nadu 626101
                   </div>
                 </div>
               </div>
@@ -52,8 +52,9 @@ export default function ContactPage() {
                 <div style={{ color: "var(--brand-primary)" }}><Phone size={24} /></div>
                 <div>
                   <div className="contact-info-label">Phone</div>
-                  <div className="contact-info-value">+91 94440 XXXXX</div>
-                  <div className="contact-info-value">+91 4562 XXXXXX</div>
+                  <div className="contact-info-value">99523 82574</div>
+                  <div className="contact-info-value">04566 220478</div>
+                  <div className="contact-info-value">04566 221627</div>
                 </div>
               </div>
 
@@ -61,7 +62,7 @@ export default function ContactPage() {
                 <div style={{ color: "var(--brand-primary)" }}><Mail size={24} /></div>
                 <div>
                   <div className="contact-info-label">Email</div>
-                  <div className="contact-info-value" style={{ textTransform: "none" }}>info@sowdambikapolytechnic.com</div>
+                  <div className="contact-info-value" style={{ textTransform: "none" }}>sowdambika84@gmail.com</div>
                 </div>
               </div>
             </div>

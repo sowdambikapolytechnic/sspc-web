@@ -1,7 +1,10 @@
+import fs from "fs";
+import path from "path";
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { TrendingUp, Building2, BookOpen } from "lucide-react";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Placements & Training | SSPC",
@@ -9,12 +12,22 @@ export const metadata: Metadata = {
 };
 
 const COMPANIES = [
-  "Infosys", "TCS", "Wipro", "HCL", "Tech Mahindra",
-  "Turbo Energies", "MEINE Electric", "Mustard Fashion",
-  "College of Engineering Guindy", "BHEL", "TNEB", "L&T",
+  "TVS BRAKES INDIA", "HYUNDAI MOBIS", "WHEELS INDIA", "DELPHI TVS", 
+  "TECHNO M", "NXGS", "MANDO", "L&T", "TURBO ENERGY", "RANE", 
+  "ELITE CONSTRUCTION", "AMARA HOME", "YAMAHA INDIA", "ROYAL ENFIELD", 
+  "PUNCH RATNA PARTNERS", "BESTER ENGG.", "BANDRASWALLA", 
+  "SOMAPPA GROUPS", "BEST CORPORATION TEXTILE"
 ];
 
 export default function PlacementsPage() {
+  const placementsDir = path.join(process.cwd(), "public/gallery/placements");
+  let images: string[] = [];
+  try {
+    images = fs.readdirSync(placementsDir).filter(f => f.match(/\.(jpeg|jpg|png|gif)$/i));
+  } catch (e) {
+    console.error("Could not read placements directory", e);
+  }
+
   return (
     <>
       <Navbar />
@@ -31,7 +44,7 @@ export default function PlacementsPage() {
           
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24, marginBottom: 80 }}>
             {[
-              { title: "Placement Rate", value: "95%", desc: "Consistent placement record across all departments.", icon: <TrendingUp size={40} /> },
+              { title: "Placement Rate", value: "100%", desc: "Consistent placement record across all departments.", icon: <TrendingUp size={40} /> },
               { title: "Recruiters", value: "50+", desc: "Top companies visiting our campus annually.", icon: <Building2 size={40} /> },
               { title: "Pre-Placement Training", value: "100%", desc: "Students trained in aptitude, technical skills, and soft skills.", icon: <BookOpen size={40} /> },
             ].map(s => (
@@ -43,6 +56,21 @@ export default function PlacementsPage() {
                </div>
             ))}
           </div>
+
+          <div style={{ textAlign: "center", marginBottom: 40 }}>
+            <h2 className="section-title" style={{ fontSize: "2rem" }}>Placement Highlights</h2>
+            <p style={{ color: "var(--text-secondary)", marginTop: 16 }}>Glimpses of our recent placement drives and offer distributions.</p>
+          </div>
+
+          {images.length > 0 && (
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: 16, marginBottom: 80 }}>
+              {images.map(img => (
+                <div key={img} style={{ position: "relative", width: "100%", height: 200, borderRadius: "var(--radius-md)", overflow: "hidden", border: "1px solid var(--border-subtle)", boxShadow: "var(--shadow-sm)" }}>
+                  <Image src={`/gallery/placements/${img}`} alt="Placement Highlight" fill style={{ objectFit: "cover" }} />
+                </div>
+              ))}
+            </div>
+          )}
 
           <div style={{ textAlign: "center", marginBottom: 40 }}>
             <h2 className="section-title" style={{ fontSize: "2rem" }}>Our Top Recruiters</h2>

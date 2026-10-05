@@ -87,7 +87,7 @@ export default function AdmissionsPage() {
                     <h4 style={{ fontFamily: "Playfair Display", fontWeight: 700, marginBottom: 8, color: "#fff", fontSize: "1.1rem" }}>Need Help?</h4>
                     <p style={{ color: "#a1a9b8", fontSize: "0.9rem", marginBottom: 16 }}>Contact our admission cell for guidance and support.</p>
                     <div style={{ display: "flex", gap: 12, alignItems: "center", color: "var(--brand-accent)", fontWeight: 600 }}>
-                      +91 94440 XXXXX
+                      9952382574, 04566220478
                     </div>
                   </div>
                 </div>

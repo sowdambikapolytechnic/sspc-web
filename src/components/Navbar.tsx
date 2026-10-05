@@ -23,6 +23,7 @@ const NAV_ITEMS = [
   { label: "Events",     href: "/events" },
   { label: "Gallery",    href: "/gallery" },
   { label: "Placements", href: "/placements" },
+  { label: "Alumni",     href: "/alumni" },
   {
     label: "About",
     href: "#",
@@ -30,11 +31,10 @@ const NAV_ITEMS = [
       { label: "Management",    href: "/management" },
       { label: "NCC",           href: "/ncc" },
       { label: "NSS",           href: "/nss" },
-      { label: "AICTE Reports", href: "/documents" },
-      { label: "Alumni",        href: "/alumni" },
     ],
   },
   { label: "Contact", href: "/contact" },
+  { label: "AICTE / Disclosure", href: "/documents" },
   { label: "Admin Panel", href: "/admin" },
 ];
 
@@ -56,13 +56,11 @@ export default function Navbar() {
         <div className="announcement-ticker">
           <span className="announcement-track">
             Admissions Open 2026–2027 — Apply Now &nbsp;|&nbsp;
-            State Rank in IT Department &nbsp;|&nbsp;
+            State Rank in All Departments &nbsp;|&nbsp;
             Placement Drive — Major companies visiting campus &nbsp;|&nbsp;
             AICTE EOA Report 2026 available for download &nbsp;|&nbsp;
-            Cultural Day — March 28th 2026 &nbsp;|&nbsp;
-            Semester Exams from March 23 onwards &nbsp;&nbsp;
             Admissions Open 2026–2027 — Apply Now &nbsp;|&nbsp;
-            State Rank in IT Department &nbsp;|&nbsp;
+            State Rank in All Departments &nbsp;|&nbsp;
             Placement Drive — Major companies visiting campus
           </span>
         </div>

@@ -2,7 +2,7 @@ import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { SignOutButton } from "@/components/SignOutButton";
-import { LayoutDashboard, Newspaper, CalendarDays, Images, LogOut, Users, Home } from "lucide-react";
+import { LayoutDashboard, Newspaper, CalendarDays, Images, LogOut, Users, Home, GraduationCap } from "lucide-react";
 
 export const metadata = {
   title: "Admin Dashboard - SSPC",
@@ -45,6 +45,9 @@ export default async function AdminLayout({
           </Link>
           <Link href="/admin/gallery" className="admin-nav-link" style={{ display: "flex", alignItems: "center", gap: 12, padding: "12px 16px", borderRadius: 8, color: "var(--text-secondary)", textDecoration: "none" }}>
             <Images size={20} /> Gallery
+          </Link>
+          <Link href="/admin/alumni" className="admin-nav-link" style={{ display: "flex", alignItems: "center", gap: 12, padding: "12px 16px", borderRadius: 8, color: "var(--text-secondary)", textDecoration: "none" }}>
+            <GraduationCap size={20} /> Alumni
           </Link>
           <div style={{ margin: "16px 0", height: 1, background: "rgba(255,255,255,0.1)" }}></div>
           <Link href="/" target="_blank" className="admin-nav-link" style={{ display: "flex", alignItems: "center", gap: 12, padding: "12px 16px", borderRadius: 8, color: "var(--brand-secondary)", textDecoration: "none" }}>

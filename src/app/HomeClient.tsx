@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { 
-  Building2, Zap, Radio, Laptop, Settings, Scissors, 
+  Building2, Zap, Radio, Laptop, Settings, Scissors, Wind,
   Users, Trophy, Briefcase, Calendar, Newspaper, 
   GraduationCap, Mic, Palette, Award, PlayCircle, MapPin
 } from "lucide-react";
@@ -24,23 +24,22 @@ const DEPARTMENTS = [
   { name: "Information Technology",    slug: "information-technology",    icon: <Laptop size={28}/>, code: "IT" },
   { name: "Mechanical Engineering",    slug: "mechanical-engineering",    icon: <Settings size={28}/>, code: "MECH" },
   { name: "Textile Technology",        slug: "textile-technology",        icon: <Scissors size={28}/>, code: "TEXT" },
+  { name: "Refrigeration & AC",        slug: "refrigeration-air-conditioning", icon: <Wind size={28}/>, code: "R&AC" },
 ];
 
 /* ── News & Events (static seed from legacy DB) ─────────────────────────────── */
 const NEWS_ITEMS = [
   { id: 1, title: "Enrolling New Faculty Members for Textile Technology", category: "Administrative", dept: "Textile Technology", date: "Mar 25, 2026", img: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=800&auto=format&fit=crop" },
-  { id: 2, title: "State Rank Holder — IT Student Scores O Grade in All 8 Subjects", category: "Achievements",    dept: "Information Technology", date: "Apr 17, 2024", img: "https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=800&auto=format&fit=crop" },
-  { id: 3, title: "Amazing Placements — New Companies for IT Department", category: "Placements",      dept: "Information Technology", date: "Mar 31, 2026", img: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=800&auto=format&fit=crop" },
+  { id: 2, title: "State Rank Holder Scores O Grade in All 8 Subjects", category: "Achievements",    dept: "All Departments", date: "Apr 17, 2024", img: "https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=800&auto=format&fit=crop" },
+  { id: 3, title: "Amazing Placements — New Companies Visiting Campus", category: "Placements",      dept: "All Departments", date: "Mar 31, 2026", img: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=800&auto=format&fit=crop" },
   { id: 4, title: "Runner Up at International Kabaddi Competition",        category: "Achievements",    dept: "EEE",                    date: "Mar 20, 2026", img: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=800&auto=format&fit=crop" },
-  { id: 5, title: "Semester Exams Starting March 23 Onwards",            category: "Announcements",   dept: "Management",             date: "Mar 23, 2026", img: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800&auto=format&fit=crop" },
-  { id: 6, title: "New Linux Laboratory Under Construction for Information Technology Dept",  category: "Infrastructure",  dept: "Information Technology", date: "Jun 6, 2026",  img: "https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=800&auto=format&fit=crop" },
+  { id: 6, title: "New Advanced Computing Laboratory Under Construction",  category: "Infrastructure",  dept: "All Departments", date: "Jun 6, 2026",  img: "https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=800&auto=format&fit=crop" },
 ];
 
 const EVENTS_ITEMS = [
   { id: 1, title: "Admissions Open — Batch 2026–2029",    category: "Admission",  date: "Mar 1, 2026",  dept: "Management",             img: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800&auto=format&fit=crop" },
   { id: 2, title: "Graduation Ceremony 2023–2026 Batch",  category: "Graduation", date: "Mar 24, 2026", dept: "Management",             img: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800&auto=format&fit=crop" },
-  { id: 3, title: "IT Department Seminar",                 category: "Seminar",    date: "Mar 10, 2026", dept: "Information Technology", img: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800&auto=format&fit=crop" },
-  { id: 4, title: "Cultural Day — Open to All",           category: "Cultural",   date: "Mar 28, 2026", dept: "Management",             img: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=800&auto=format&fit=crop" },
+  { id: 3, title: "Engineering Technical Seminar",                 category: "Seminar",    date: "Mar 10, 2026", dept: "All Departments", img: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800&auto=format&fit=crop" },
   { id: 5, title: "Republic Day Sports Day",              category: "Sports",     date: "Jan 26, 2026", dept: "Management",             img: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=800&auto=format&fit=crop" },
   { id: 6, title: "Mega Workshop — Mechanical Engineering", category: "Workshop", date: "Jun 10, 2026", dept: "Mechanical Engineering", img: "https://images.unsplash.com/photo-1511578314322-379a191f63bc?q=80&w=800&auto=format&fit=crop" },
 ];
@@ -68,9 +67,11 @@ const MANAGEMENT = [
 
 /* ── Companies / Recruiters ─────────────────────────────────────────────────── */
 const COMPANIES = [
-  "Infosys", "TCS", "Wipro", "HCL", "Tech Mahindra",
-  "Turbo Energies", "MEINE Electric", "Mustard Fashion",
-  "College of Engineering Guindy", "BHEL", "TNEB", "L&T",
+  "TVS BRAKES INDIA", "HYUNDAI MOBIS", "WHEELS INDIA", "DELPHI TVS", 
+  "TECHNO M", "NXGS", "MANDO", "L&T", "TURBO ENERGY", "RANE", 
+  "ELITE CONSTRUCTION", "AMARA HOME", "YAMAHA INDIA", "ROYAL ENFIELD", 
+  "PUNCH RATNA PARTNERS", "BESTER ENGG.", "BANDRASWALLA", 
+  "SOMAPPA GROUPS", "BEST CORPORATION TEXTILE"
 ];
 
 export default function HomeClient() {
@@ -338,7 +339,7 @@ export default function HomeClient() {
           {/* Placement stats */}
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 30, marginBottom: 48 }}>
             {[
-              { num: "95%", label: "Placement Rate" },
+              { num: "100%", label: "Placement Rate" },
               { num: "50+", label: "Companies" },
               { num: "₹3L+",label: "Avg Package" },
             ].map((s) => (

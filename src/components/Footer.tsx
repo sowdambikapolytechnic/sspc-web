@@ -52,6 +52,7 @@ export default function Footer() {
             { label: "Information Technology",    href: "/departments/information-technology" },
             { label: "Mechanical Engineering",    href: "/departments/mechanical-engineering" },
             { label: "Textile Technology",        href: "/departments/textile-technology" },
+            { label: "Refrigeration & AC",        href: "/departments/refrigeration-air-conditioning" },
           ].map((l) => (
             <Link key={l.href} href={l.href} className="footer-link">{l.label}</Link>
           ))}
@@ -61,13 +62,13 @@ export default function Footer() {
         <div>
           <div className="footer-heading">Contact</div>
           <div className="footer-link flex-center" style={{ justifyContent: "flex-start", gap: 8, cursor: "default" }}>
-            <MapPin size={16} /> Virudhunagar, Tamil Nadu
+            <MapPin size={16} style={{ flexShrink: 0 }} /> Thiruchuli Road, Aruppukottai, Tamil Nadu 626101
           </div>
           <div className="footer-link flex-center" style={{ justifyContent: "flex-start", gap: 8, cursor: "default" }}>
-            <Phone size={16} /> +91 94440 XXXXX
+            <Phone size={16} style={{ flexShrink: 0 }} /> 9952382574, 04566 220478, 04566 221627
           </div>
           <div className="footer-link flex-center" style={{ justifyContent: "flex-start", gap: 8, cursor: "default" }}>
-            <Mail size={16} /> info@sowdambikapolytechnic.com
+            <Mail size={16} style={{ flexShrink: 0 }} /> sowdambika84@gmail.com
           </div>
           <div style={{ marginTop: 24 }}>
             <div className="footer-heading">Documents</div>
@@ -83,7 +84,7 @@ export default function Footer() {
           © {new Date().getFullYear()} Sri Sowdambika Polytechnic College. All rights reserved.
         </div>
         <div className="footer-copy">
-          Built by Information Technology Dept · 2026 Batch
+          Built by 2026 Batch
         </div>
       </div>
     </footer>
