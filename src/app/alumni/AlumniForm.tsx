@@ -13,10 +13,11 @@ export default function AlumniForm() {
     setErrorMsg("");
     
     try {
-      const formData = new FormData(e.currentTarget);
+      const formElement = e.currentTarget;
+      const formData = new FormData(formElement);
       await submitAlumniForm(formData);
       setStatus("success");
-      e.currentTarget.reset();
+      formElement.reset();
     } catch (error: any) {
       setStatus("error");
       setErrorMsg(error.message || "Failed to submit form");
@@ -69,6 +70,11 @@ export default function AlumniForm() {
       <div>
         <label className="form-label">Current Status / Occupation</label>
         <input type="text" name="currentStatus" required className="form-input" placeholder="e.g. Software Engineer at Google, or Higher Studies at MIT" />
+      </div>
+
+      <div>
+        <label className="form-label">Communication Address</label>
+        <textarea name="address" required className="form-textarea" placeholder="Enter your full communication address..." rows={3}></textarea>
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>

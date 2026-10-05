@@ -58,11 +58,10 @@ const GALLERY_IMAGES = [
 
 /* ── Management ─────────────────────────────────────────────────────────────── */
 const MANAGEMENT = [
-  { name: "Rajendran",         designation: "Chairman",       img: "/images/management/rajendran.jpg" },
-  { name: "Vellaichamy",       designation: "Secretary",      img: "/images/management/vellaichamy.jpg" },
-  { name: "Kandhavelchamy",    designation: "Principal",      img: "/images/management/kandhavelchamy.jpeg" },
-  { name: "Murugesan",         designation: "Vice Principal", img: "/images/management/murugesan.jpg" },
-  { name: "Devaraj",           designation: "HOD - Civil",   img: "/images/management/devaraj.jpg" },
+  { name: "Rajendran",         designation: "President",      img: "/images/management/president.jpg" },
+  { name: "Vellaichamy",       designation: "Secretary",      img: "/images/management/secretary.jpg" },
+  { name: "Murugesan",         designation: "Treasurer",      img: "/images/management/treasurer.jpg" },
+  { name: "Kandhavelchamy",    designation: "Principal",      img: "/images/management/principal.jpeg" },
 ];
 
 /* ── Companies / Recruiters ─────────────────────────────────────────────────── */
@@ -372,7 +371,7 @@ export default function HomeClient() {
           </div>
 
           <div className="dept-grid">
-            {MANAGEMENT.slice(0,3).map((m, i) => (
+            {MANAGEMENT.map((m, i) => (
               <div key={m.name} className="glass-card animate-fadeup" style={{ animationDelay: `${i * 0.1}s`, textAlign: "center", overflow: "hidden" }}>
                 <Image
                   src={m.img}

@@ -92,7 +92,7 @@ const DEPT_DATA: Record<string, any> = {
     name: "Textile Technology",
     code: "TEXT",
     icon: <Scissors size={48} />,
-    hod: "G. SETHU",
+    hod: "G. SEETHARAMAN",
     img: "/gallery/textile/textile_1.JPG",
     desc: "Textile Technology is a unique program covering the science and engineering of textile manufacturing, from fiber production to fabric finishing and garment design.",
     vision: "To be a premier department in textile technology education, catering to the needs of the textile and apparel industry.",

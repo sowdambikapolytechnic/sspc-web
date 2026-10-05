@@ -10,8 +10,9 @@ export async function submitAlumniForm(formData: FormData) {
   const currentStatus = formData.get("currentStatus") as string;
   const email = formData.get("email") as string;
   const phone = formData.get("phone") as string;
+  const address = formData.get("address") as string;
 
-  if (!firstName || !course || !yearOfPassing || !currentStatus || (!email && !phone)) {
+  if (!firstName || !course || !yearOfPassing || !currentStatus || !address || (!email && !phone)) {
     throw new Error("Please fill out all required fields.");
   }
 
@@ -23,6 +24,7 @@ export async function submitAlumniForm(formData: FormData) {
       currentStatus,
       email,
       phone,
+      address,
     }
   });
 

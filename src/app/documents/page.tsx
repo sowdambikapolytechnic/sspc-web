@@ -2,13 +2,24 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { FileText, ClipboardList } from "lucide-react";
+import { db } from "@/lib/db";
 
 export const metadata: Metadata = {
   title: "Documents & Reports | SSPC",
   description: "AICTE EOA Reports and Mandatory Disclosure of Sri Sowdambika Polytechnic College.",
 };
 
-export default function DocumentsPage() {
+export const dynamic = "force-dynamic";
+
+export default async function DocumentsPage() {
+  const documents = await db.document.findMany({
+    include: { media: true },
+    orderBy: { year: "desc" }
+  });
+
+  const mandatoryDisclosure = documents.find(d => d.category === "mandatory_disclosure");
+  const aicteReports = documents.filter(d => d.category === "AICTE");
+
   return (
     <>
       <Navbar />
@@ -32,27 +43,30 @@ export default function DocumentsPage() {
                 <div style={{ color: "var(--brand-secondary)", fontSize: "0.85rem", marginTop: 4, fontWeight: 600 }}>PDF Document</div>
               </div>
             </div>
-            <a href="/documents/mandatory_disclosure.pdf" target="_blank" className="btn-ghost">
-              View / Download
-            </a>
+            {mandatoryDisclosure ? (
+              <a href={mandatoryDisclosure.media.url} target="_blank" className="btn-ghost">
+                View / Download
+              </a>
+            ) : (
+              <span style={{ color: "var(--text-muted)", fontSize: "0.9rem" }}>Not available</span>
+            )}
           </div>
 
           <h2 className="section-title" style={{ fontSize: "1.8rem", marginBottom: 24 }}>AICTE EOA Reports</h2>
           <div style={{ display: "grid", gap: 16 }}>
-             {[
-               "EOA Report 2023-2024",
-               "EOA Report 2022-2023",
-               "EOA Report 2021-2022",
-               "EOA Report 2020-2021",
-             ].map(doc => (
-               <div key={doc} className="glass-card" style={{ padding: 20, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+             {aicteReports.length > 0 ? aicteReports.map(doc => (
+               <div key={doc.id} className="glass-card" style={{ padding: 20, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
                     <div style={{ color: "var(--brand-secondary)" }}><ClipboardList size={28} /></div>
-                    <div style={{ fontFamily: "Inter, sans-serif", fontSize: "1rem", fontWeight: 600, color: "var(--text-primary)" }}>{doc}</div>
+                    <div style={{ fontFamily: "Inter, sans-serif", fontSize: "1rem", fontWeight: 600, color: "var(--text-primary)" }}>{doc.title}</div>
                   </div>
-                  <button className="btn-ghost" style={{ padding: "8px 16px", fontSize: "0.8rem" }}>Request Copy</button>
+                  <a href={doc.media.url} target="_blank" className="btn-ghost" style={{ padding: "8px 16px", fontSize: "0.8rem", textDecoration: "none" }}>View Report</a>
                </div>
-             ))}
+             )) : (
+               <div className="glass-card" style={{ padding: 20, textAlign: "center", color: "var(--text-muted)" }}>
+                 No EOA reports available online.
+               </div>
+             )}
           </div>
           <p style={{ color: "var(--text-muted)", fontSize: "0.85rem", marginTop: 16 }}>
             * For copies of older reports, please contact the administration office.
